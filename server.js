@@ -1,8 +1,11 @@
 // let http = require('http')
 // let fs = require('fs')
 const express = require('express')
+const dotenv = require('dotenv')
 
-const PORT = 3000 || process.env.PORT
+dotenv.config()
+
+const PORT = process.env.PORT || 3000
 
 const app = express()
 
