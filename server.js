@@ -2,13 +2,14 @@
 // let fs = require('fs')
 const express = require('express')
 
-
 const PORT = 3000 || process.env.PORT
 
 const app = express()
 
 app.set('view engine', 'ejs')
 app.use('./assets', express.static('public'))
+
+app.get('/', require('./route/'))
 
 app.listen(PORT, (err) => {
     if (err) throw err
