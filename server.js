@@ -1,15 +1,20 @@
-let http = require('http')
-let fs = require('fs')
-let express = require('express')
+// let http = require('http')
+// let fs = require('fs')
+const express = require('express')
 
-let app = express()
+
+const PORT = 3000 || process.env.PORT
+
+const app = express()
 
 app.set('view engine', 'ejs')
 app.use('./assets', express.static('public'))
 
-app.get('/', (request, response)=>{
-    response.render('pages/index', {test: 'Hello'})
-}).listen(3000)
+app.listen(PORT, (err) => {
+    if (err) throw err
+    console.log(`Server is running on port: ${PORT}`)
+})
+
 
 // let server = http.createServer()
 // server.on('request', (req, res)=>{
