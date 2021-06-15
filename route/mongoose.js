@@ -14,7 +14,7 @@ const schemaUser = new Schema({
 }, { collection: 'Users' })
 
 const ModelUser = mongoose.model('User', schemaUser)
-mongoose.connect('mongodb://localhost:27017/nodejs', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
     // To check th connection
 db.on('error', console.error.bind(console, 'Connection error:'))
@@ -25,12 +25,13 @@ db.once('open', function() {
 router.get('/', (req, res) => {
     ModelUser.find((err, doc) => {
         if (err) throw err
-        res.json(doc)
+        res.render('./mongoose/', { doc })
     })
 })
 
 router.post('/', (req, res) => {
     const { username, fullname, email } = req.body
+
 })
 
 module.exports = router
