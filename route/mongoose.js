@@ -2,6 +2,7 @@ const exp = require('express')
 const router = exp.Router()
 const mongoose = require('mongoose')
 const bp = require('body-parser')
+const cors = require('cors')
 const { success, error } = require('consola')
 
 router.use(exp.urlencoded({ extended: true }))
@@ -25,13 +26,12 @@ db.once('open', function() {
 router.get('/', (req, res) => {
     ModelUser.find((err, doc) => {
         if (err) throw err
-        res.render('./mongoose/', { doc })
+        res.json(doc)
     })
 })
 
 router.post('/', (req, res) => {
     const { username, fullname, email } = req.body
-
 })
 
 module.exports = router
