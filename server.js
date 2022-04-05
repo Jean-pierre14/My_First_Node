@@ -15,7 +15,7 @@ app.use('/', require('./route/'))
 app.use('/mongoose', require('./route/mongoose'))
 
 app.listen(PORT, (err) => {
-    if (err) throw err
+    if (err) error({ message: `Error: ==> ${err}`, badge: true })
     success({ message: `Server is running on port: ${PORT}`, badge: true })
 })
 
