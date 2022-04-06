@@ -18,6 +18,7 @@ const ModelUser = mongoose.model('User', schemaUser)
 mongoose.connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
     // To check th connection
+
 db.on('error', console.error.bind(console, 'Connection error:'))
 db.once('open', function() {
     success({ message: `Connected to mongodb`, badge: true })
@@ -29,6 +30,7 @@ router.get('/', (req, res) => {
         res.json(doc)
     })
 })
+
 
 router.post('/', (req, res) => {
     const { username, fullname, email } = req.body

@@ -18,17 +18,3 @@ app.listen(PORT, (err) => {
     if (err) error({ message: `Error: ==> ${err}`, badge: true })
     success({ message: `Server is running on port: ${PORT}`, badge: true })
 })
-
-
-// let server = http.createServer()
-// server.on('request', (req, res)=>{
-//     res.writeHead(200, {'Content-type': 'text/html'})
-//     fs.readFile('./views/index.ejs', 'utf8', (err, data)=>{
-//         if(err){
-//             res.send('Cannot open this url')
-//         } else{
-//             res.end(data)
-//         }
-//     })
-// })
-// server.listen(8080)

@@ -1,18 +1,102 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*,
+*:before,
+*:after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
-html, body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+::-webkit-scrollbar {
+  width: 5px;
 }
-.container{
-    width: 80%;
-    position: relative;
-    margin: 0% auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+::-webkit-scrollbar-button {
+  background-color: #eee;
 }
+
+::-webkit-scrollbar-thumb {
+  width: 5px;
+  background: #000;
+}
+
+::-webkit-scrollbar-track {
+  width: 5px;
+  background: #1879ef;
+}
+
+body {
+  position: relative;
+  height: 100%;
+  background-color: #111;
+  background: linear-gradient(to top right, rgb(160, 160, 162), rgb(108, 108, 108));
+  background-position: center;
+  background-repeat: no-repeat;
+}
+body .content {
+  position: relative;
+  display: block;
+}
+body .content .margin-center {
+  position: relative;
+  width: 50%;
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2rem;
+}
+@media screen and (max-width: 780px) {
+  body .content .margin-center {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 90%;
+  }
+}
+body .content .margin-center .card {
+  position: relative;
+  width: 100%;
+  background: #eee;
+  background-color: linear-gradient(45deg, red, black);
+  padding: 0.5rem;
+  overflow: hidden;
+  border-radius: 1rem;
+  margin: 10px auto;
+  box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.05);
+}
+body .content .margin-center .card .body {
+  background: #eee;
+  background-color: rgb(245, 245, 187);
+  padding: 1rem;
+  width: 100%;
+  max-height: 250px;
+  overflow: auto;
+}
+body .content .margin-center .card .body h1,
+body .content .margin-center .card .body h2,
+body .content .margin-center .card .body h3,
+body .content .margin-center .card .body h4,
+body .content .margin-center .card .body p {
+  font-family: Arial, Helvetica, sans-serif;
+}
+body .content .margin-center .card .footer {
+  position: relative;
+  padding: 0.5rem;
+}
+body .content .margin-center .card .footer .flex {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+body .content .margin-center .card .footer .flex button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: none;
+  padding: 0.8rem;
+  border-radius: 0.4rem;
+  color: #fff;
+  background-color: #1879ef;
+}
+body .content .margin-center .card .footer .flex small {
+  font-family: ubuntu, calibri;
+}/*# sourceMappingURL=style.css.map */
