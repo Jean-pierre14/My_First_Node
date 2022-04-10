@@ -2,12 +2,9 @@ const exp = require('express')
 const router = exp.Router()
 const { getUsers, postUsers, updateUsers, deleteUsers } = require('../controllers/routersControllers')
 
-router.get('/', getUsers)
+router.route('/').get(getUsers).post(postUsers)
 
-router.post('/', postUsers)
 
-router.put('/:id', updateUsers)
-
-router.delete('/:id', deleteUsers)
+router.route('/:id').put(updateUsers).delete(deleteUsers)
 
 module.exports = router

@@ -11,7 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "ejs": "^2.7.1",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-async-handler": "^1.2.0"
   },
   "devDependencies": {
     "body-parser": "^1.19.0",

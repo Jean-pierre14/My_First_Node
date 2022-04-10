@@ -2,28 +2,34 @@
  * get all users
  * 
  */
-const getUsers = (req, res) => {
+const getUsers = async(req, res) => {
         res.status(200).json({ message: 'All users' })
     }
     /**
      * get all users
      * 
      */
-const postUsers = (req, res) => {
+const postUsers = async(req, res) => {
+        const { username, fullname, email } = req.body
+
+        if (!username && !fullname && !email) {
+            res.status(400)
+            throw new Error('Please add fileds')
+        }
         res.status(200).json({ message: 'Create user' })
     }
     /**
      * get all users
      * 
      */
-const updateUsers = (req, res) => {
+const updateUsers = async(req, res) => {
         res.status(200).json({ message: `Update user ${req.params.id}` })
     }
     /**
      * Delete user
      * 
      */
-const deleteUsers = (req, res) => {
+const deleteUsers = async(req, res) => {
     res.status(200).json({ message: `Delete user ${req.params.id}` })
 }
 
