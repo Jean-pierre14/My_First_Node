@@ -1,13 +1,13 @@
 const exp = require('express')
 const router = exp.Router()
-const getUsers = require('../controllers/routersControllers')
+const { getUsers, postUsers, updateUsers, deleteUsers } = require('../controllers/routersControllers')
 
-router.get('/', (req, res) => {
-    res.render('pages/index', { title: 'Index page' })
-})
+router.get('/', getUsers)
 
-router.post('/', (req, res) => {
-    res.send("Post")
-})
+router.post('/', postUsers)
+
+router.put('/:id', updateUsers)
+
+router.delete('/:id', deleteUsers)
 
 module.exports = router
