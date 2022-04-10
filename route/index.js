@@ -1,5 +1,6 @@
 const exp = require('express')
 const router = exp.Router()
+const getUsers = require('../controllers/routersControllers')
 
 router.get('/', (req, res) => {
     res.render('pages/index', { title: 'Index page' })
