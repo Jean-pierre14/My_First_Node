@@ -15,6 +15,13 @@ module.exports = function merge(s1, s2, skipConflictingPaths) {
   s1.method(s2.methods);
   s1.static(s2.statics);
 
+  for (const [option, value] of Object.entries(s2._userProvidedOptions)) {
+    if (!(option in s1._userProvidedOptions)) {
+      s1._userProvidedOptions[option] = value;
+      s1.options[option] = value;
+    }
+  }
+
   for (const query in s2.query) {
     s1.query[query] = s2.query[query];
   }
@@ -23,5 +30,6 @@ module.exports = function merge(s1, s2, skipConflictingPaths) {
     s1.virtuals[virtual] = s2.virtuals[virtual].clone();
   }
 
+  s1._indexes = s1._indexes.concat(s2._indexes || []);
   s1.s.hooks.merge(s2.s.hooks, false);
 };
