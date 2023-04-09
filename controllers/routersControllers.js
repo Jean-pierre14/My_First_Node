@@ -1,14 +1,15 @@
+const Student = require('../models/users');
 /**
  * get all users
  * 
  */
 const getUsers = async(req, res) => {
-        res.status(200).json({ message: 'All users' })
-    }
-    /**
-     * get all users
-     * 
-     */
+    res.status(200).json({ message: 'All users' })
+}
+/**
+ * get all users
+ * 
+ */
 const postUsers = async(req, res) => {
         const { username, fullname, email } = req.body
 
