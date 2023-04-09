@@ -13,7 +13,12 @@ export const GetStudents = async (req, res) => {
 };
 
 export const GetStudent = (req, res) => {
-  res.json("Student ALL");
+  let Id = req.params.id;
+
+  Student.findById(Id, (err, docs) => {
+    if (err) console.log(`Error: ${err.message}`);
+    res.status(200).json(docs);
+  });
 };
 
 export const UpdateStudents = (req, res) => {
