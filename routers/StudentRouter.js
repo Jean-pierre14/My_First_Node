@@ -1,12 +1,11 @@
 import exp from "express";
-import bcrypt from "bcrypt";
+import bcrypt, { hash } from "bcrypt";
 
 import {
   DeleteAllStudents,
   DeleteStudent,
   GetStudent,
   GetStudents,
-  UpdateStudents,
 } from "../controllers/StudentControllers.js";
 
 import Student from "../models/Student.js";
@@ -72,6 +71,59 @@ router.post(
   }
 );
 
-router.route("/:id").get(GetStudent).put(UpdateStudents).delete(DeleteStudent);
+router.route("/:id").get(GetStudent).delete(DeleteStudent);
 
+router.put(
+  "/:id",
+  [
+    body("username")
+      .notEmpty()
+      .withMessage("Username is required")
+      .isLength({ min: 3 })
+      .withMessage("Username must be at least 4 characters"),
+    body("fullname")
+      .notEmpty()
+      .withMessage("Fullname is required")
+      .isLength({ min: 10 })
+      .withMessage("Fullname must be at least 10 characters"),
+    body("email")
+      .notEmpty()
+      .withMessage("Email is required")
+      .normalizeEmail()
+      .isEmail()
+      .withMessage("Email is not valid"),
+  ],
+  (req, res) => {
+    let studentId = req.params.id;
+    let { username, fullname, email } = req.body;
+
+    const update = { username: username, fullname: fullname, email: email };
+    const query = { id: studentId };
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+    bcrypt.genSalt(10, (err, salt) => {
+      if (err) throw err;
+      bcrypt.hash(req.body.password, salt, (err, hash) => {
+        if (err) throw err;
+        let password = hash;
+        Student.findOneAndUpdate(
+          { _id: studentId },
+          {
+            username: req.body.username,
+            fullname: req.body.fullname,
+            email: req.body.email,
+            password: password,
+          }
+        )
+          .then((doc) => {
+            res.json(doc);
+          })
+          .catch((error) => console.log(error));
+      });
+    });
+  }
+);
 export default router;

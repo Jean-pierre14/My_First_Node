@@ -12,18 +12,13 @@ export const GetStudents = async (req, res) => {
   }
 };
 
-export const GetStudent = (req, res) => {
-  let Id = req.params.id;
-
-  Student.findById(Id, (err, docs) => {
-    if (err) console.log(`Error: ${err.message}`);
-    res.status(200).json(docs);
-  });
+export const GetStudent = async (req, res) => {
+  let studentId = req.params.id;
+  await Student.findById(studentId)
+    .then((student) => res.json({ msg: student }))
+    .catch((error) => res.status(500).json({ msg: error.message }));
 };
 
-export const UpdateStudents = (req, res) => {
-  res.json("Student Update ALL");
-};
 export const DeleteStudent = (req, res) => {
   res.json("Student Delete one");
 };
