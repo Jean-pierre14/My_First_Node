@@ -1,7 +1,4 @@
 import Student from "./../models/Student.js";
-import bcrypt from "bcrypt";
-
-import { body, validationResult } from "express-validator";
 
 export const GetStudents = async (req, res) => {
   try {
@@ -19,9 +16,15 @@ export const GetStudent = async (req, res) => {
     .catch((error) => res.status(500).json({ msg: error.message }));
 };
 
-export const DeleteStudent = (req, res) => {
-  res.json("Student Delete one");
+export const DeleteStudent = async (req, res) => {
+  let studentId = req.params.id;
+  await Student.findOneAndDelete(studentId)
+    .then((student) => res.json(student))
+    .catch((err) => console.log(err));
 };
-export const DeleteAllStudents = (req, res) => {
-  res.json("Student Delete All");
+
+export const DeleteAllStudents = async (req, res) => {
+  await Student.deleteMany({})
+    .then((_) => res.json({ msg: "Collection is clean" }))
+    .catch((err) => console.log(err));
 };
