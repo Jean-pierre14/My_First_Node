@@ -1,10 +1,12 @@
+import Student from "../Student/Student"
 
 const Home = () => {
   return (
       <>
           <div className="container-fluid">
+              <div className="container">
               <div className="row justify-content-center">
-                  <div className="col-md-9 my-5">
+                  <div className="col-md-7 my-5">
                       <div className="card card-body text-center">
                         <h2 className="">My first Nodejs and ReactJs</h2>
                         <p>
@@ -12,8 +14,9 @@ const Home = () => {
                         </p>
                       </div>
                   </div>
-                  <div className="col-md-9 my-5">
+                  <div className="col-md-7 my-5">
                       <div className="card card-body">
+                        <h3 className="text-center">Registration</h3>
                       <form action="" method="post">
                           <div className="form-group">
                               <label htmlFor="username">Username</label>
@@ -43,24 +46,12 @@ const Home = () => {
                       </form>
                       </div>
                   </div>
-                  <div className="col-md-9 my-5">
+                  <div className="col-md-7 my-5">
                       <div className="card card-body">
-                          <form className="mb-2" action="" method="post">
-                              <input type="search" name="search" id="search" placeholder="Search..." className="form-control" />
-                          </form>
-                          <ul className="list-group">
-                              <li className="list-group-item d-flex justify-content-between align-items-center">
-                                  <span>Name</span>
-                                  <div>
-                                      <div className="btn-group">
-                                          <a href="#" className="btn btn-sm btn-info">Edit</a>
-                                          <a href="#" className="btn btn-sm btn-danger">Delete</a>
-                                      </div>
-                                  </div>
-                              </li>
-                          </ul>
+                          <Student/>
                       </div>
                   </div>
+              </div>
               </div>
         </div>
       </>
