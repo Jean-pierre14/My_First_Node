@@ -94,36 +94,20 @@ router.put(
       .withMessage("Email is not valid"),
   ],
   (req, res) => {
+
     let studentId = req.params.id;
     let { username, fullname, email } = req.body;
 
     const update = { username: username, fullname: fullname, email: email };
-    const query = { id: studentId };
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
-    bcrypt.genSalt(10, (err, salt) => {
-      if (err) throw err;
-      bcrypt.hash(req.body.password, salt, (err, hash) => {
-        if (err) throw err;
-        let password = hash;
-        Student.findOneAndUpdate(
-          { _id: studentId },
-          {
-            username: req.body.username,
-            fullname: req.body.fullname,
-            email: req.body.email,
-            password: password,
-          }
-        )
-          .then((doc) => {
-            res.json(doc);
-          })
-          .catch((error) => console.log(error));
-      });
-    });
+    
+    Student.findOneAndUpdate({_id: studentId}, update)
+      .then(updatedData=> {res.json({data: updatedData}).status(201)})
+      .catch(error=> console.log("Error updating document: "+error))
   }
 );
 export default router;

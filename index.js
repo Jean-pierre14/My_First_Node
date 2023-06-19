@@ -10,7 +10,7 @@ import dbConnection from "./config/dbConnection.js";
 dotenv.config({ path: `./.env` });
 
 // DB connection
-dbConnection()
+dbConnection();
 
 const app = exp();
 const PORT = process.env.PORT || 5000;
