@@ -13,6 +13,7 @@ dotenv.config({ path: `./.env` });
 dbConnection()
 
 const app = exp();
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(exp.json());
@@ -37,9 +38,11 @@ app.get("/", (request, response) => {
 
 app.use("/student", StudentRouters);
 
-app.listen(7000, (err) => {
-  if (err) throw err.message;
 
-  console.log(`Server run on port: 7000`);
-
-});
+const Server = () => {
+  app.listen(PORT, (error) => {
+    if (error) throw error.message
+    console.log(`Server run on PORT: http://localhost:${PORT}`)
+  })
+}
+Server()
