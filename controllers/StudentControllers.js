@@ -1,6 +1,6 @@
 import Student from "./../models/Student.js";
 
-// Get all student
+// Get all students
 export const GetStudents = async (req, res) => {
   try {
     const students = await Student.find({});
@@ -18,7 +18,20 @@ export const GetStudent = async (req, res) => {
     .catch((error) => res.status(500).json({ msg: error.message }));
 };
 
-// event delete
+// Update a student by id
+export const UpdateStudent = async (req, res) => {
+  let studentId = req.params.id;
+  let updatedData = req.body; // Assuming the updated data is sent in the request body
+
+  try {
+    const updatedStudent = await Student.findByIdAndUpdate(studentId, updatedData, { new: true });
+    res.json({ msg: "Student updated successfully", student: updatedStudent });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+
+// Delete a student by id
 export const DeleteStudent = async (req, res) => {
   let studentId = req.params.id;
   await Student.findOneAndDelete(studentId)
@@ -26,6 +39,7 @@ export const DeleteStudent = async (req, res) => {
     .catch((err) => console.log(err));
 };
 
+// Delete all students
 export const DeleteAllStudents = async (req, res) => {
   await Student.deleteMany({})
     .then((_) => res.json({ msg: "Collection is clean" }))
